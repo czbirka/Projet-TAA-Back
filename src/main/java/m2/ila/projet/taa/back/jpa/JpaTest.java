@@ -38,23 +38,10 @@ public class JpaTest {
 		tx.begin();
 		try {
 			test.createData();
-
-			// test.createPersons();
-			// test.createLieux();
-			// test.createSports();
-			// test.createRegions();
-			// test.createDepartements();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tx.commit();
-
-		// test.listPersons();
-		// test.listLieux();
-		// test.listSports();
-		// test.listRegions();
-		// test.listDepartements();
 
 		manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
@@ -107,84 +94,58 @@ public class JpaTest {
 		Departement d3 = new Departement();
 		d3.setNom("Manche");
 		manager.persist(d3);
-
-		Activite a1 = new Activite();
-		a1.setNom("Football");
-		Condition c1 = new Condition(1.5, 2.3,  5.9, 7.5, 5, 15.3, 25.6, 35.6);
-		//c1.setVentMin(1.5);
-		//c1.setVentInf(2.5);
-		//c1.setVentSup(5.23);
-		//c1.setVentMax(7.12);
-		a1.setCondition(c1);
-		manager.persist(a1);
 		
-//		
-/*
-		
-		//manager.persist(a1);
-//		Activite a2 = new Activite();
-//		a2.setNom("Jokari");
-//		manager.persist(a2);
-//		Activite a3 = new Activite();
-//		a3.setNom("Planche à voile");
-//		manager.persist(a3);		
-		
-		//
-		Lieu l1 = new Lieu();
-		l1.setNom("Lieu1");
-		Lieu l2 = new Lieu();
-		l2.setNom("Lieu2");
-		Lieu l3 = new Lieu();
-		l3.setNom("Lieu3");
-		Lieu l4 = new Lieu();
-		l4.setNom("Lieu4");
-		Lieu l5 = new Lieu();
-		l5.setNom("Lieu5");
-
-		
-
-		manager.persist(l1);
-		manager.persist(l2);
-		manager.persist(l3);
-		manager.persist(l4);
-		manager.persist(l5);
-
-		
-
-		
-		
-
-		// l1.addSport(s1);
-		// l1.addSport(s2);
-
-		a1.addLieu(l1);
-		a2.addLieu(l1);
-		a3.addLieu(l1);
-		a2.addLieu(l2);
-
 		d1.setRegion(r1);
 		d2.setRegion(r1);
 		d3.setRegion(r2);
-
+		
+		Lieu l1 = new Lieu("Rennes", 48.1119800, -1.6742900);
+		manager.persist(l1);
+		Lieu l2 = new Lieu("Saint-Malo", 48.649337, -2.025674);
+		manager.persist(l2);
+		Lieu l3 = new Lieu("Quiberon", 47.4833, -3.1167);
+		manager.persist(l3);
+		Lieu l4 = new Lieu("Saint-Lô", 49.116667, -1.083333);
+		manager.persist(l4);
+		
 		l1.setDepartement(d1);
 		l2.setDepartement(d1);
 		l3.setDepartement(d2);
 		l4.setDepartement(d3);
-		l5.setDepartement(d3);
-
-		u1.addActivite(a1);
-		u1.addActivite(a2);
-		u2.addActivite(a1);
-		u2.addActivite(a3);
-
-		u1.addLieu(l1);
-		u1.addLieu(l2);
-		u1.addLieu(l3);
-		u1.addLieu(l4);
-		u2.addLieu(l3);
-		u2.addLieu(l4);
-		u2.addLieu(l5);*/
-
+		
+		Activite a1u1 = new Activite();
+		a1u1.setNom("Football");
+		Condition c1 = new Condition(1.5, 2.3,  5.9, 7.5, 5, 15.3, 25.6, 35.6);
+		a1u1.setCondition(c1);
+		manager.persist(a1u1);
+		a1u1.setUser(u1);
+		
+		Activite a2u1 = new Activite();
+		a2u1.setNom("Jokari");
+		Condition c2 = new Condition(0, 2,  4, 8, 12, 18, 25, 35);
+		a2u1.setCondition(c2);
+		manager.persist(a2u1);
+		a2u1.setUser(u1);
+		
+		Activite a3u1 = new Activite();
+		a3u1.setNom("Planche à voile");
+		Condition c3 = new Condition(4, 8,  10, 15, 10, 15, 24, 35);
+		a3u1.setCondition(c3);
+		manager.persist(a3u1);
+		a3u1.setUser(u1);
+		
+		a1u1.addLieu(l1);
+		a1u1.addLieu(l2);
+		a1u1.addLieu(l3);
+		a1u1.addLieu(l4);
+		
+		a2u1.addLieu(l1);
+		a2u1.addLieu(l2);
+		
+		a3u1.addLieu(l1);
+		a3u1.addLieu(l2);
+		a3u1.addLieu(l3);
+		
 	}
 
 

@@ -59,25 +59,46 @@ public class UserDAO {
 	}
 
 	public Optional<User> findOneById(long id) {
-		Optional<User> person = Optional.empty();
+		Optional<User> user = Optional.empty();
 		try {
-			person = Optional.of(manager.createQuery("select u from User as u where u.id = :id", User.class)
+			user = Optional.of(manager.createQuery("select u from User as u where u.id = :id", User.class)
 					.setParameter("id", id).getSingleResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return person;
+		return user;
 	}
 
-	public Optional<User> findOneByName(String name) {
-		Optional<User> person = Optional.empty();
-		try {
-			person = Optional.of(manager.createQuery("select u from User as u where u.name = :name", User.class)
-					.setParameter("name", name).getSingleResult());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return person;
+//	public Optional<User> findOneByName(String name) {
+//		Optional<User> person = Optional.empty();
+//		try {
+//			person = Optional.of(manager.createQuery("select u from User as u where u.nom = :name", User.class)
+//					.setParameter("name", name).getSingleResult());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return person;
+//	}
+	
+//	public List<User> findByName(String name) {
+//		//Optional<User> person = Optional.empty();
+//		List<User> liste = new ArrayList<User>();
+//		try {
+//			liste = manager.createQuery("select u from User as u where u.nom = :name", User.class)
+//					.setParameter("name", name).getResultList();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return liste;
+//	}
+
+	public List<User> findByName(String name) {
+	    List<User> liste = new ArrayList<User>();
+	    
+	    liste = manager.createQuery("select u from User u where u.name = :name", User.class)
+	    		.setParameter("name", name)
+	    		.getResultList();
+		return liste;
 	}
 	
 }

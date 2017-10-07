@@ -31,17 +31,25 @@ public class UserResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getById(@PathParam("id") long id) {
+	public Response findOneById(@PathParam("id") long id) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return (Response) userDao.findOneById(id).map(e -> Response.ok().entity(e).build())
 				.orElse(Response.status(Response.Status.NOT_FOUND).build());
 	}
 
+//	@GET
+//	@Path("name/{name}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response findByName(@PathParam("name") String name) {
+//		return (Response) userDao.findOneByName(name).map(e -> Response.ok().entity(e).build())
+//				.orElse(Response.status(Response.Status.NOT_FOUND).build());
+//	}
+	
 	@GET
 	@Path("name/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByName(@PathParam("name") String name) {
-		return (Response) userDao.findOneByName(name).map(e -> Response.ok().entity(e).build())
-				.orElse(Response.status(Response.Status.NOT_FOUND).build());
+	public List<User> findByName(@PathParam("name") String name) {
+		return userDao.findByName(name);
 	}
 
 	@PUT
