@@ -23,16 +23,23 @@ public class UserResource {
 	private UserDAO userDao = new UserDAO();
 
 	@GET
+	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getAll() {
 		return userDao.findAll();
 	}
+	
+	@GET
+	@Path("name/{nameparam}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> findByName(@PathParam("nameparam") String name) {
+		return userDao.findByName(name);
+	}
 
 	@GET
-	@Path("{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findOneById(@PathParam("id") long id) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return (Response) userDao.findOneById(id).map(e -> Response.ok().entity(e).build())
 				.orElse(Response.status(Response.Status.NOT_FOUND).build());
 	}
@@ -45,12 +52,12 @@ public class UserResource {
 //				.orElse(Response.status(Response.Status.NOT_FOUND).build());
 //	}
 	
-	@GET
-	@Path("name/{name}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> findByName(@PathParam("name") String name) {
-		return userDao.findByName(name);
-	}
+//	@GET
+//	@Path("name/{nameparam}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<User> findByName(@PathParam("nameparam") String name) {
+//		return userDao.findByName(name);
+//	}
 
 	@PUT
 	@Path("{name}/{firstname}")

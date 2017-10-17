@@ -92,11 +92,11 @@ public class UserDAO {
 //		return liste;
 //	}
 
-	public List<User> findByName(String name) {
+	public List<User> findByName(String nom) {
 	    List<User> liste = new ArrayList<User>();
 	    
-	    liste = manager.createQuery("select u from User u where u.name = :name", User.class)
-	    		.setParameter("name", name)
+	    liste = manager.createQuery("select u from User as u where u.nom = :nom", User.class)
+	    		.setParameter("nom", nom)
 	    		.getResultList();
 		return liste;
 	}
